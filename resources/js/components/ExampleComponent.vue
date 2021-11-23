@@ -16,8 +16,21 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        data(){
+          return{products:[]}
+        },
+       created(){
+            this.axios.get('http://localhost/api/products/').then(response => {
+                this.products = response.data;
+             });
+        },
+       methods:{
+           deleteProduct(id){
+                this.axios.delete('http://localhost/api/products/${id}').then(response =>{
+                    let i=this.products.map(data=>data.id).indexOf(id);
+                    this.products.splice(i, 1)
+                });
+            }
         }
     }
 </script>
