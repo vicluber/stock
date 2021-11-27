@@ -20,9 +20,6 @@
           return{products:[]}
         },
        created(){
-            this.axios.get('http://localhost/api/products/').then(response => {
-                this.products = response.data;
-             });
         },
        methods:{
            deleteProduct(id){

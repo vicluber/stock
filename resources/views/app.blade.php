@@ -5,8 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" value="{{ csrf_token() }}" />
-    <title>VueJS CRUD Operations in Laravel</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Stock</title>
     <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet" />
+    <script>
+        window.AppSettings = {
+            csrfToken: "{{ csrf_token() }}"
+        }
+    </script>
 </head>
 
 <body>

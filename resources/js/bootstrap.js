@@ -20,7 +20,8 @@ try {
  */
 
 window.axios = require('axios');
-
+// According to sanctum in laravel website in order to set csrf toekn
+window.axios.defaults.withCredentials = true
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**

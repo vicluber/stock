@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\LoginController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+/*Route::get('/', function () {
+    return view('app');
+});*/
 
+/*Route::get('/{vue_capture?}', function () {
+    return view('app');
+})->where('vue_capture', '[\/\w\.-]*');*/
 Route::get('{any}', function () {
     return view('app');
 })->where('any', '.*');
+Auth::routes();
