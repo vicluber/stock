@@ -96,8 +96,11 @@ class RegisterController extends Controller
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->plainTextToken;
-   
-        return 'User register successfully.';
+        $token =  $user->createToken('MyApp')->plainTextToken;
+        $response = [
+            'user' => $user,
+            'token' => $token
+        ];
+        return response($response, 201);
     }
 }

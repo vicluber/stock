@@ -31,7 +31,6 @@
        methods:{
            async register(){
                 const res = await UsersService.register(this.formData)
-                console.log(window)
            }
         }
     }

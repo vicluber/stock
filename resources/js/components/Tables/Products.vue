@@ -31,7 +31,6 @@
        created(){
             this.axios.get('api/products').then(response => {
                 this.products = response.data;
-                console.log(response)
              });
         },
        methods:{

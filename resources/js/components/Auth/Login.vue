@@ -38,7 +38,6 @@
        methods:{
            async authenticate(){
                 const res = await UsersService.authenticate(this.formData)
-                console.log(res)
            }
         }
     }
