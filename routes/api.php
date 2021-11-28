@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DomainController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,8 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 /**
  * This sets all the CRUD routes for the product domain
  */
-
-Route::middleware('auth:login')->group(function () {
-});
+Route::post('login', [LoginController::class, 'login']);
+Route::post('register', [RegisterController::class, 'register']);
 Route::middleware('auth:sanctum')->group( function () {
     Route::resource('products', ProductController::class);
 });
