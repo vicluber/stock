@@ -25,10 +25,13 @@
                     id: 1,
                     name: 'fasdf',
                     detail: 'dasfa'
-                }]
+                }],
+                token: ''
             }
         },
        created(){
+            this.token = localStorage.getItem("token");
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}` //include this in your created function
             this.axios.get('api/products').then(response => {
                 this.products = response.data;
              });

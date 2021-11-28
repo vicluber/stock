@@ -38,6 +38,8 @@
        methods:{
            async authenticate(){
                 const res = await UsersService.authenticate(this.formData)
+                localStorage.setItem("token", res.data.token);
+                if(res.data.authenticated){ this.$router.push({name:'Products'}) }
            }
         }
     }

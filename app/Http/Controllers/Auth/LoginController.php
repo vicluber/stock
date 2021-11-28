@@ -56,6 +56,7 @@ class LoginController extends Controller
         $token = $user->createToken('MyApp')->plainTextToken;
         $response = [
             'user' => $user,
+            'authenticated' => true,
             'token' => $token
         ];
         return response($response, 201);
