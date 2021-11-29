@@ -5,9 +5,14 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
-                    <th>Detail</th>
+                    <th>Titulo</th>
+                    <th>Descripcion</th>
                     <!--<th>Actions</th>-->
+                </tr>
+                <tr v-for="product in products" :key="product.id">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.summary }}</td>
                 </tr>
             </thead>
             <tbody>
