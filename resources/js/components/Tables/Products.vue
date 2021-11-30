@@ -1,52 +1,47 @@
 <template>
     <div>
         <h2 class="text-center">Products List</h2>
-        <table class="table">
+        <div class="table-responsive">
+            <table class="table table-striped table-sm">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Titulo</th>
-                    <th>Descripcion</th>
-                    <!--<th>Actions</th>-->
-                </tr>
-                <tr v-for="product in products" :key="product.id">
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.title }}</td>
-                    <td>{{ product.summary }}</td>
+                <th scope="col">#</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                
+                <tr v-for="(product, index) in products" :key="index">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.summary }}</td>
+                    <td><button type="button" @click="deleteProduct(index)" class="btn btn-outline-danger">Delete</button></td>
+                </tr>
             </tbody>
-        </table>
+            </table>
+        </div>
     </div>
 </template>
 
 <script>
+import ProductsService from '../../services/ProductsService'
     export default {
         data() {
             return {
-                products: [{
-                    id: 1,
-                    name: 'fasdf',
-                    detail: 'dasfa'
-                }],
+                products: [],
                 token: ''
             }
         },
-       created(){
-            this.token = localStorage.getItem("token");
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.token}` //include this in your created function
-            this.axios.get('api/products').then(response => {
-                this.products = response.data;
-             });
+        async created(){
+            const res = await ProductsService.getAllProducts()
+            this.products = res.data;
         },
-       methods:{
-           deleteProduct(id){
-                this.axios.delete('http://localhost:8000/api/products/${id}').then(response =>{
-                    let i=this.products.map(data=>data.id).indexOf(id);
-                    this.products.splice(i, 1)
-                });
+        methods:{
+            async deleteProduct(index){
+                let productId = this.products[index].id
+                const res = await ProductsService.deleteProduct(productId)
+                if(res){ this.products.splice(index , 1) }
             }
         }
     } 
