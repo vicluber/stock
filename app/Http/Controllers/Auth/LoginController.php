@@ -51,7 +51,7 @@ class LoginController extends Controller
         $fields = $request->validate(['email' => 'required|string', 'password' => 'required|string']);
         $user = User::where('email', $fields['email'])->first();
         if(!$user || !Hash::check($fields['password'], $user->password)) {
-            return response(['message' => 'remon hasan'], 401);
+            return response(['message' => 'Wrong credentials.'], 401);
         }
         $token = $user->createToken('MyApp')->plainTextToken;
         $response = [
