@@ -37,8 +37,11 @@
        methods:{
            async authenticate(){
                 const res = await UsersService.authenticate(this.formData)
-                localStorage.setItem("token", res.data.token);
-                if(res.data.authenticated){ this.$router.push({name:'Products'}) }
+                if(res.data.authenticated){
+                    localStorage.setItem("token", res.data.token)
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
+                    this.$router.push({name:'Products'})
+                }
            }
         }
     }
