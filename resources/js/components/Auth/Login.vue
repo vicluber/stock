@@ -15,7 +15,7 @@
                     <div class="extra mt-3 row justify-content-between">
                         <div class="col-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="RememberPassword">
+                                <input class="form-check-input" type="checkbox" checked disabled value="" id="RememberPassword">
                                 <label class="form-check-label" for="RememberPassword">
                                 Remember me
                                 </label>
@@ -23,7 +23,7 @@
                         </div><!--//col-6-->
                         <div class="col-6">
                             <div class="forgot-password text-end">
-                                <a href="reset-password.html">Forgot password?</a>
+                                <a href="#">Forgot password?</a>
                             </div>
                         </div><!--//col-6-->
                     </div>
