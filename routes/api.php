@@ -30,5 +30,6 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 Route::post('login', [LoginController::class, 'login']);
 Route::post('register', [RegisterController::class, 'register']);
 Route::middleware('auth:sanctum')->group( function () {
+    Route::delete('logout', [LoginController::class, 'logout']);
     Route::resource('products', ProductController::class);
 });

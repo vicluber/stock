@@ -71,10 +71,17 @@ class LoginController extends Controller
      *
      * @return string
      */
-    public function logout(Request $request) {
-        auth()->user()->tokens()->delete();
-        return [
-            'message' => 'Logged out'
-        ];
+    public function logout() {
+        try {
+            if(auth()->user()->tokens()->delete())
+            {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (\Exception $e) {
+            return response('Error', 400);
+        }
     }
 }
