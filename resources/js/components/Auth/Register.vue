@@ -6,13 +6,19 @@
                     <form action="#" @submit.prevent="register">
                         <h1 class="h3 mb-3 font-weight-bold">Stock</h1>
                         <input type="text" class="form-control" placeholder="Name" required="" autofocus="" v-model="formData.name">
+                        <div class="alert alert-warning my-3 font-weight-bold" role="alert" v-for="(nameError, index) in errors.name" :key="index">
+                            {{ nameError }}
+                        </div>
                         <label for="inputEmail" class="sr-only">Email address</label>
                         <input type="email" class="form-control my-3" placeholder="Email address" required autofocus v-model="formData.email">
+                        <div class="alert alert-warning my-3 font-weight-bold" role="alert" v-for="(emailError, index) in errors.email" :key="index">
+                            {{ emailError }}
+                        </div>
                         <label for="inputPassword" class="sr-only">Password</label>
                         <input type="password" class="form-control my-3" placeholder="Password" required v-model="formData.password">
                         <input type="password" class="form-control" placeholder="Password confirmation" required="" v-model="formData.password_confirmation">
-                        <div class="alert alert-info my-3" role="alert">
-                            A simple info alert—check it out!
+                        <div class="alert alert-warning my-3 font-weight-bold" role="alert" v-for="(passwordError, index) in errors.password" :key="index">
+                            {{ passwordError }}
                         </div>
                         <div class="text-center py-3">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
@@ -23,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col" style="background-image: url('https://picsum.photos/700/960');">
+        <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col" style="background-image: url('https://picsum.photos/960/1280');">
             <img src="https://picsum.photos/700/960" style="visibility: hidden;" />
         </div>
     </div>
@@ -39,12 +45,20 @@
                     email: '',
                     password: '',
                     password_confirmation: ''
+                },
+                errors: {
+                    name: [],
+                    email: [],
+                    password: []
                 }
             }
         },
        methods:{
            async register(){
                 const res = await UsersService.register(this.formData)
+                this.errors.email = res.data.error.name
+                this.errors.email = res.data.error.email
+                this.errors.password = res.data.error.password
            }
         }
     }
