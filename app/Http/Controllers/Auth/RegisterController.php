@@ -81,10 +81,9 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
-            'c_password' => 'required|same:password',
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required_with:password_confirmation', 'string', 'min:8']
         ]);
    
         if($validator->fails()){
@@ -92,15 +91,20 @@ class RegisterController extends Controller
                 'error' => $validator->errors()
             ]);
         }
-   
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        $user = User::create($input);
-        $token =  $user->createToken('MyApp')->plainTextToken;
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-        return response($response, 201);
+
+        try {
+            $input = $request->all();
+            $input['password'] = Hash::make($input['password']);
+            $user = User::create($input);
+            $token =  $user->createToken('MyApp')->plainTextToken;
+            $response = [
+                'user' => $user,
+                'registered' => true,
+                'token' => $token
+            ];
+            return response($response, 201);
+        } catch (\Exception $e) {
+            return response('Error', 400);
+        }
     }
 }

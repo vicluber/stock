@@ -10,11 +10,14 @@
                         <input type="email" class="form-control my-3" placeholder="Email address" required autofocus v-model="formData.email">
                         <label for="inputPassword" class="sr-only">Password</label>
                         <input type="password" class="form-control my-3" placeholder="Password" required v-model="formData.password">
-                        <input type="password" class="form-control" placeholder="Password confirmation" required="" v-model="formData.c_password">
-                        
+                        <input type="password" class="form-control" placeholder="Password confirmation" required="" v-model="formData.password_confirmation">
+                        <div class="alert alert-info my-3" role="alert">
+                            A simple info alert—check it out!
+                        </div>
                         <div class="text-center py-3">
                             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
-                            <p class="mt-5 mb-3 text-muted">Do you have an account already? Sign in <router-link to="/" >here</router-link>.</p>
+                            <p class="my-3 text-muted">Do you have an account already? Sign in <router-link to="/" >here</router-link>.</p>
+                            <p class="my-3 text-muted">Forgot password? Recover it <router-link to="/" >here</router-link>.</p>
                         </div>
                     </form>
                 </div>
@@ -34,12 +37,10 @@
                 formData: {
                     name: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    password_confirmation: ''
                 }
             }
-        },
-        async created () {
-            
         },
        methods:{
            async register(){

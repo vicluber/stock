@@ -48,18 +48,22 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $fields = $request->validate(['email' => 'required|string', 'password' => 'required|string']);
-        $user = User::where('email', $fields['email'])->first();
-        if(!$user || !Hash::check($fields['password'], $user->password)) {
-            return response(['message' => 'Wrong credentials.'], 401);
+        try {
+            $fields = $request->validate(['email' => 'required|string', 'password' => 'required|string']);
+            $user = User::where('email', $fields['email'])->first();
+            if(!$user || !Hash::check($fields['password'], $user->password)) {
+                return response(['message' => 'Wrong credentials.'], 401);
+            }
+            $token = $user->createToken('MyApp')->plainTextToken;
+            $response = [
+                'user' => $user,
+                'authenticated' => true,
+                'token' => $token
+            ];
+            return response($response, 201);
+        } catch (\Exception $e) {
+            return response('Error', 400);
         }
-        $token = $user->createToken('MyApp')->plainTextToken;
-        $response = [
-            'user' => $user,
-            'authenticated' => true,
-            'token' => $token
-        ];
-        return response($response, 201);
     }
 
     /**
