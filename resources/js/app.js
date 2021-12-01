@@ -11,9 +11,7 @@ import App from './App.vue';
 import VueAxios from 'vue-axios';
 import VueRouter from 'vue-router';
 import axios from 'axios';
-import {
-    routes
-} from './routes';
+import { routes } from './routes';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,6 +26,15 @@ const router = new VueRouter({
     mode: 'history',
     routes: routes
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.name !== 'Login' && to.name !== 'Register' &&  !localStorage.getItem("auth")) {
+        next({ name: 'Login' })
+    }
+    else {
+        next()
+    }
+})
 
 const app = new Vue({
     el: '#app',

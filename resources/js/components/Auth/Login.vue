@@ -55,6 +55,7 @@
                 const res = await UsersService.authenticate(this.formData)
                 if(res.data.authenticated){
                     localStorage.setItem("token", res.data.token)
+                    localStorage.setItem("auth", res.data.authenticated)
                     axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
                     this.$router.push({name:'Dashboard'})
                 }
