@@ -56,9 +56,16 @@
        methods:{
            async register(){
                 const res = await UsersService.register(this.formData)
-                this.errors.email = res.data.error.name
-                this.errors.email = res.data.error.email
-                this.errors.password = res.data.error.password
+                if(res.data.registered){
+                    localStorage.setItem("token", res.data.token)
+                    localStorage.setItem("auth", res.data.authenticated)
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`
+                    this.$router.push({name:'Dashboard'})
+                } else {
+                    this.errors.name = res.data.error.name
+                    this.errors.email = res.data.error.email
+                    this.errors.password = res.data.error.password
+                }
            }
         }
     }
