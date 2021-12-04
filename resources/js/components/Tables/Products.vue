@@ -10,7 +10,7 @@
                   <product-form />
               </div>
               <div class="col-md-6">
-                  <categorie-form v-if="showCategorieForm" />
+                  <category-form v-if="showCategoryForm" />
               </div>
           </div>
           <div class="row my-5">
@@ -49,20 +49,20 @@
 import Sidebar from "../Sidebar"
 import Header from "../Header"
 import ProductForm from "../Forms/ProductForm"
-import CategorieForm from "../Forms/CategorieForm"
+import CategoryForm from "../Forms/CategoryForm"
 import ProductsService from '../../services/ProductsService'
     export default {
         components: {
             'sidebar-component': Sidebar,
             'header-component': Header,
             'product-form': ProductForm,
-            'categorie-form': CategorieForm
+            'category-form': CategoryForm
         },
         data() {
             return {
                 products: [],
                 token: '',
-                showCategorieForm: false
+                showCategoryForm: false
             }
         },
         async created(){
