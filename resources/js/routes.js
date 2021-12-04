@@ -3,6 +3,7 @@ import Login from './components/Auth/Login.vue';
 import Register from './components/Auth/Register.vue';
 import Products from './components/Tables/Products.vue';
 import Dashboard from './components/Dashboard.vue';
+import App from './App.vue';
 
 export const routes = [
     {

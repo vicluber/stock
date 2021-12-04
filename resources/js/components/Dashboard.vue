@@ -1,111 +1,9 @@
 <template>
   <div>
-    <header
-      class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
-    >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"
-        >Company name</a
-      >
-      <button
-        class="navbar-toggler position-absolute d-md-none collapsed"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <input
-        class="form-control form-control-dark w-100"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-          <a href="#" class="nav-link px-3" @click="logout">Sign out</a>
-        </div>
-      </div>
-    </header>
+    <header-component />
     <div class="container-fluid">
       <div class="row">
-        <nav
-          id="sidebarMenu"
-          class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
-        >
-          <div class="position-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  <i class="bi bi-boombox"></i>
-                  Dashboard
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Orders
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Products
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Customers
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Reports
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Integrations
-                </a>
-              </li>
-            </ul>
-
-            <h6
-              class="
-                sidebar-heading
-                d-flex
-                justify-content-between
-                align-items-center
-                px-3
-                mt-4
-                mb-1
-                text-muted
-              "
-            >
-              <span>Saved reports</span>
-              <a class="link-secondary" href="#" aria-label="Add a new report">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-plus-circle"
-                  aria-hidden="true"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" y1="8" x2="12" y2="16"></line>
-                  <line x1="8" y1="12" x2="16" y2="12"></line>
-                </svg>
-              </a>
-            </h6>
-          </div>
-        </nav>
-
+        <sidebar-component />
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="chartjs-size-monitor">
             <div class="chartjs-size-monitor-expand"><div class=""></div></div>
@@ -166,16 +64,12 @@
 </template>
 
 <script>
-import UsersService from "../services/UsersService";
+import Sidebar from "./Sidebar"
+import Header from "./Header"
 export default {
-  methods: {
-    async logout() {
-      localStorage.clear();
-      const res = await UsersService.logout();
-      if (res) {
-        this.$router.push({ name: "Login" });
-      }
-    },
-  },
-};
+  components: {
+    'sidebar-component': Sidebar,
+    'header-component': Header
+  }
+}
 </script>

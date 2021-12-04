@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row m-0">
         <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
             <div class="text-center">
                 <div class="form-signin" style="width: 100%; max-width: 330px; padding: 15px; margin: 0 auto;">
