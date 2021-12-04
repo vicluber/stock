@@ -33,7 +33,7 @@
 </template>
 <script>
 export default {
-    name: 'CategorieForm',
+    name: 'CategoryForm',
     setup() {
         
     },
