@@ -10,7 +10,7 @@
                   <product-form />
               </div>
               <div class="col-md-6">
-                  <categorie-form />
+                  <categorie-form v-if="showCategorieForm" />
               </div>
           </div>
           <div class="row my-5">
@@ -61,7 +61,8 @@ import ProductsService from '../../services/ProductsService'
         data() {
             return {
                 products: [],
-                token: ''
+                token: '',
+                showCategorieForm: false
             }
         },
         async created(){

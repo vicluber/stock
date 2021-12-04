@@ -5,27 +5,19 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-            <label for="inputCity">City</label>
+            <label for="inputCity">Title</label>
             <input type="text" class="form-control" id="inputCity">
             </div>
-            <div class="form-group col-md-4">
-            <label for="inputState">State</label>
-            <select id="inputState" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-            </select>
+            <div class="form-group col-md-6">
+                <label for="inputState">State</label>
+                <select id="inputState" class="form-control">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                </select>
             </div>
-            <div class="form-group col-md-2">
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck">
-            <label class="form-check-label" for="gridCheck">
-                Check me out
-            </label>
+            <div class="form-group col-md-12">
+                <label for="exampleFormControlTextarea1">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
