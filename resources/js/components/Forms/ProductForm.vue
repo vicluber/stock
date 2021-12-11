@@ -47,7 +47,6 @@ export default {
     name: 'ProductForm',
     async created(){
         const res = await CategoriesService.getAllCategories()
-        console.log(res.data)
         this.categories = res.data;
     },
 }

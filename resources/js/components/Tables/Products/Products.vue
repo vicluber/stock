@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- Modal -->
+    <edit-product-modal />
     <header-component />
     <div class="container-fluid">
       <div class="row">
@@ -32,7 +34,7 @@
                         <td>{{ product.summary }}</td>
                         <td>
                             <button type="button" @click="deleteProduct(index)" class="btn btn-outline-danger">Delete</button>
-                            <button type="button" @click="editProduct(index)" class="btn btn-outline-info">Edit</button>
+                            <button type="button" @click="editProduct(index)" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-outline-info">Edit</button>
                         </td>
                     </tr>
                 </tbody>
@@ -46,17 +48,19 @@
 </template>
 
 <script>
-import Sidebar from "../Sidebar"
-import Header from "../Header"
-import ProductForm from "../Forms/ProductForm"
-import CategoryForm from "../Forms/CategoryForm"
-import ProductsService from '../../services/ProductsService'
+import Sidebar from "../../Sidebar"
+import Header from "../../Header"
+import ProductForm from "../../Forms/ProductForm"
+import CategoryForm from "../../Forms/CategoryForm"
+import EditProductModal from "./EditProductModal"
+import ProductsService from '../../../services/ProductsService'
     export default {
         components: {
             'sidebar-component': Sidebar,
             'header-component': Header,
             'product-form': ProductForm,
-            'category-form': CategoryForm
+            'category-form': CategoryForm,
+            'edit-product-modal': EditProductModal
         },
         data() {
             return {
