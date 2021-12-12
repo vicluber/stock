@@ -36,7 +36,25 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $newProduct = new Product();
+            $newProduct->title = $request->input('title');
+            $newProduct->type = $request->input('type');
+            //$newProduct->domain_id = Auth::User()->domain_id;
+            $newProduct->domain_id = 1;
+            $newProduct->summary = $request->input('summary');
+            $newProduct->save();
+            $newProduct->categories()->attach([$request->input('category')]);
+            return response()->json([
+                'success'=>true, 
+                'message'=>'string', 
+                'data'=>$newProduct
+            ]);
+            //return response()->success('Success', /*['resource' => 'des Kommentars', 'resourceE' => 'comment'],*/ $newProduct, 200, true);
+            // return response()->success(__('success.resolved', ['resource' => 'des Kommentars', 'resourceE' => 'comment']), null, 200, true);
+        } catch (RepositoryException $e) {
+            return response()->error(__('error.resolved', ['resource' => 'des Kommentars', 'resourceE' => 'comment']), 400, $e);
+        }
     }
 
     /**

@@ -1,5 +1,5 @@
 <template>
-    <form action="#" @submit.prevent="createProduct">
+    <form action="#" @submit.prevent="addProduct">
         <div class="text-center">
             <h2>New Product</h2>
         </div>
@@ -12,7 +12,7 @@
                 <label for="inputState">Category</label>
                 <select id="inputState" class="form-control" required v-model="formData.category">
                     <option>Select category</option>
-                    <option v-for="category in categories" v-bind:value="category.id">{{ category.title }}</option>
+                    <option v-for="(category, index) in categories" :key="index" v-bind:value="category.id">{{ category.title }}</option>
                 </select>
             </div>
             <div class="col-md-1">
@@ -29,6 +29,7 @@
 </template>
 <script>
 import CategoriesService from '../../services/CategoriesService'
+import ProductsService from '../../services/ProductsService'
 export default {
     name: 'ProductForm',
     data() {
@@ -39,7 +40,7 @@ export default {
                 summary: '',
                 type: 1,
                 content: '',
-                category: 1
+                category: 0
             },
             categories: [],
         }
@@ -49,5 +50,11 @@ export default {
         const res = await CategoriesService.getAllCategories()
         this.categories = res.data;
     },
+    methods:{
+        async addProduct(){
+            const res = await ProductsService.postProduct(this.formData)
+            console.log(res)
+        }
+    }
 }
 </script>
