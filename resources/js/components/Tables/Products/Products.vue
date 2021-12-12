@@ -9,7 +9,7 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
           <div class="row my-5">
               <div class="col-md-6">
-                  <product-form />
+                  <product-form @createdProduct="addCreatedProductToArray" @toggleCreateCategory="showCategoryForm = !showCategoryForm" />
               </div>
               <div class="col-md-6">
                   <category-form v-if="showCategoryForm" />
@@ -78,6 +78,9 @@ import ProductsService from '../../../services/ProductsService'
                 let productId = this.products[index].id
                 const res = await ProductsService.deleteProduct(productId)
                 if(res){ this.products.splice(index , 1) }
+            },
+            addCreatedProductToArray(createdProduct){
+                this.products.unshift(createdProduct)
             }
         }
     } 
