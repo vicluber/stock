@@ -1,50 +1,49 @@
 <template>
-  <div>
-    <!-- Modal -->
-    <edit-product-modal />
-    <header-component />
-    <div class="container-fluid">
-      <div class="row">
-        <sidebar-component />
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <div class="row my-5">
-              <div class="col-md-6">
-                  <product-form @createdProduct="addCreatedProductToArray" @toggleCreateCategory="showCategoryForm = !showCategoryForm" />
-              </div>
-              <div class="col-md-6">
-                  <category-form v-if="showCategoryForm" />
-              </div>
-          </div>
-          <div class="row my-5">
-            <h2 class="text-center">Products List</h2>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Descripcion</th>
-                    <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(product, index) in products" :key="index">
-                        <td>{{ product.id }}</td>
-                        <td>{{ product.title }}</td>
-                        <td>{{ product.summary }}</td>
-                        <td>
-                            <button type="button" @click="deleteProduct(index)" class="btn btn-outline-danger">Delete</button>
-                            <button type="button" @click="editProduct(index)" data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-outline-info">Edit</button>
-                        </td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>
-          </div>
-        </main>
-      </div>
+    <div>
+        <!-- Modal -->
+        <edit-product-modal />
+        <header-component />
+            <v-row>
+                <v-col
+                    cols="12"
+                    md="2"
+                >
+                    <sidebar-component />
+                </v-col>
+                <v-col
+                    cols="12"
+                    md="10"
+                >
+                    <v-row>
+                        <v-col
+                            cols="12"
+                            md="6"
+                        >
+                            <product-form
+                                @createdProduct="addCreatedProductToArray"
+                                @toggleCreateCategory="showCategoryForm = !showCategoryForm"
+                            />
+                        </v-col>
+                        <v-col
+                            cols="12"
+                            md="6"
+                        >
+                            <category-form
+                                v-if="showCategoryForm"
+                            />
+                        </v-col>
+                    </v-row>
+                    <div>
+                        <v-data-table
+                        :headers="headers"
+                        :items="products"
+                        item-key="id"
+                        >
+                        </v-data-table>
+                    </div>
+                </v-col>
+            </v-row>
     </div>
-  </div>
 </template>
 
 <script>
@@ -64,6 +63,16 @@ import ProductsService from '../../../services/ProductsService'
         },
         data() {
             return {
+                headers: [
+                {
+                    text: 'id',
+                    align: 'start',
+                    sortable: false,
+                    value: 'id',
+                },
+                { text: 'Title', value: 'title' },
+                { text: 'Summary', value: 'summary' }
+                ],
                 products: [],
                 token: '',
                 showCategoryForm: false
