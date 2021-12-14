@@ -1,33 +1,60 @@
 <template>
-    <div>
-        <form action="#" @submit.prevent="addProduct">
-            <div class="text-center">
-                <h2>New Product</h2>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="inputCity">Title</label>
-                <input type="text" class="form-control" placeholder="Title" required="" v-model="formData.title">
-                </div>
-                <div class="form-group col-md-5">
-                    <label for="inputState">Category</label>
-                    <select id="inputState" class="form-control" required v-model="formData.category">
-                        <option>Select category</option>
-                        <option v-for="(category, index) in categories" :key="index" v-bind:value="category.id">{{ category.title }}</option>
-                    </select>
-                </div>
-                <div class="col-md-1">
-                    <label class="invisible">Create</label>
-                    <button type="button" @click="toggleCreateCategory" class="btn btn-primary">New</button>
-                </div>
-                <div class="form-group col-md-12">
-                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="formData.summary"></textarea>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
-    </div>
+    <v-row>
+        <v-form
+            ref="form"
+            v-model="valid"
+            lazy-validation
+        >
+            <v-text-field
+                v-model="formData.title"
+                :counter="10"
+                :rules="titleRules"
+                label="Title"
+                required
+            ></v-text-field>
+        
+            <v-select
+                v-model="formData.category"
+                :items="categories"
+                item-text="title"
+                item-value="id"
+                :rules="[v => !!v || 'Item is required']"
+                label="Item"
+                required
+            ></v-select>
+        
+            <v-textarea
+                v-model="formData.summary"
+                label="Summary"
+                value=""
+                hint="Short description"
+            ></v-textarea>
+
+            <v-btn
+                :disabled="!valid"
+                color="success"
+                class="mr-4"
+                @click="addProduct"
+            >
+                Save
+            </v-btn>
+        
+            <v-btn
+                color="error"
+                class="mr-4"
+                @click="reset"
+            >
+                Reset Form
+            </v-btn>
+        
+            <v-btn
+                color="warning"
+                @click="resetValidation"
+            >
+                Reset Validation
+            </v-btn>
+        </v-form>
+    </v-row>
 </template>
 <script>
 import CategoriesService from '../../services/CategoriesService'
@@ -36,6 +63,11 @@ export default {
     name: 'ProductForm',
     data() {
         return {
+            valid: true,
+            titleRules: [
+            v => !!v || 'Title is required',
+            v => (v && v.length <= 255) || 'Title must be less than 255 characters',
+            ],
             formData: {
                 title: '',
                 domainId: 1,
@@ -54,12 +86,22 @@ export default {
     },
     methods:{
         async addProduct(){
-            const res = await ProductsService.postProduct(this.formData)
-            this.$emit('createdProduct', res.data.data)
+            this.$refs.form.validate() // Calling Vuetify form reference for validating the form and setting the this.valid varaible
+            if(this.valid)
+            {
+                const res = await ProductsService.postProduct(this.formData)
+                this.$emit('createdProduct', res.data.data)
+            }
         },
         toggleCreateCategory() {
             this.$emit('toggleCreateCategory', true)
-        }
+        },
+        reset () {
+            this.$refs.form.reset()
+        },
+        resetValidation () {
+            this.$refs.form.resetValidation()
+        },
     }
 }
 </script>
