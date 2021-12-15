@@ -1,44 +1,32 @@
 <template>
-    <div>
+    <div class="col-10">
         <edit-product-modal />
-        <v-row>
+        <v-row class="py-12">
             <v-col
                 cols="12"
-                md="2"
+                md="6"
             >
+                <product-form
+                    @createdProduct="addCreatedProductToArray"
+                    @toggleCreateCategory="showCategoryForm = !showCategoryForm"
+                />
             </v-col>
             <v-col
                 cols="12"
-                md="10"
+                md="6"
             >
-                <v-row class="py-12">
-                    <v-col
-                        cols="12"
-                        md="6"
-                    >
-                        <product-form
-                            @createdProduct="addCreatedProductToArray"
-                            @toggleCreateCategory="showCategoryForm = !showCategoryForm"
-                        />
-                    </v-col>
-                    <v-col
-                        cols="12"
-                        md="6"
-                    >
-                        <category-form
-                            v-if="showCategoryForm"
-                        />
-                    </v-col>
-                </v-row>
-                <v-data-table
-                    :headers="headers"
-                    :items="products"
-                    item-key="id"
-                    class="py-12"
-                >
-                </v-data-table>
+                <category-form
+                    v-if="showCategoryForm"
+                />
             </v-col>
         </v-row>
+        <v-data-table
+            :headers="headers"
+            :items="products"
+            item-key="id"
+            class="py-12"
+        >
+        </v-data-table>
     </div>
 </template>
 

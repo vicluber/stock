@@ -8,7 +8,7 @@ import App from './App.vue';
 export const routes = [
     {
         name: 'Login',
-        path: '/',
+        path: '/login',
         component: Login
     },
     {
@@ -28,7 +28,7 @@ export const routes = [
     },
     {
         name: 'Dashboard',
-        path: '/dashboard',
+        path: '/',
         component: Dashboard
     },
 ];

@@ -1,12 +1,11 @@
 <template>
     <v-app>
-        <div v-if="auth">
-            <header-component />
-            <sidebar-component />
-            <router-view></router-view>
-        </div>
-        <div v-else>
-            <router-view></router-view>
+        <header-component v-if="auth" />
+        <div class="container-fluid">
+            <div class="row">
+                <sidebar-component v-if="auth" />
+                <router-view></router-view>
+            </div>
         </div>
     </v-app>
 </template>
@@ -19,16 +18,13 @@ import Header from "./components/Header"
             'sidebar-component': Sidebar,
             'header-component': Header,
         },
-        data() {
-            return {
-                auth: false
-            }
+        created() {
+            console.log(this.auth)
         },
-        watch: {
-            auth () {
-                console.log(this.auth)
-                this.auth = (!localStorage.getItem("auth")) ? false : true
-                console.log(this.auth)
+        computed: {
+            auth ()
+            {
+                return (!localStorage.getItem("auth")) ? false : true
             }
         }
     }
