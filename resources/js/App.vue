@@ -19,7 +19,7 @@ import Header from "./components/Header"
             'header-component': Header,
         },
         created() {
-            console.log(this.auth)
+            console.log("Is authenticated: "+this.auth)
         },
         computed: {
             auth ()

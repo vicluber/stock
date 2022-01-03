@@ -26,6 +26,28 @@
             item-key="id"
             class="py-12"
         >
+            <template v-slot:item="row">
+                <tr>
+                    <td>{{row.item.id}}</td>
+                    <td>{{row.item.title}}</td>
+                    <td>{{row.item.summary}}</td>
+                    <td>
+                        <v-icon
+                            small
+                            class="mr-2"
+                            @click="editItem(item)"
+                        >
+                            mdi-pencil
+                        </v-icon>
+                        <v-icon
+                            small
+                            @click="deleteProduct(row.item)"
+                        >
+                            mdi-delete
+                        </v-icon>
+                    </td>
+                </tr>
+            </template>
         </v-data-table>
     </div>
 </template>
@@ -35,26 +57,28 @@ import ProductForm from "../../Forms/ProductForm"
 import CategoryForm from "../../Forms/CategoryForm"
 import EditProductModal from "./EditProductModal"
 import ProductsService from '../../../services/ProductsService'
+import ConfirmationDialog from '../../Dialogs/ConfirmationDialog'
     export default {
         components: {
             'product-form': ProductForm,
             'category-form': CategoryForm,
-            'edit-product-modal': EditProductModal
+            'edit-product-modal': EditProductModal,
+            'confirmation-dialog': ConfirmationDialog
         },
         data() {
             return {
                 headers: [
-                {
-                    text: 'id',
-                    align: 'start',
-                    sortable: true,
-                    value: 'id',
-                },
-                { text: 'Title', value: 'title' },
-                { text: 'Summary', value: 'summary' }
+                    {
+                        text: 'id',
+                        align: 'start',
+                        sortable: true,
+                        value: 'id',
+                    },
+                    { text: 'Title', value: 'title' },
+                    { text: 'Summary', value: 'summary' },
+                    { text: 'actions', value: 'actions' }
                 ],
                 products: [],
-                token: '',
                 showCategoryForm: false
             }
         },
@@ -63,10 +87,11 @@ import ProductsService from '../../../services/ProductsService'
             this.products = res.data;
         },
         methods:{
-            async deleteProduct(index){
-                let productId = this.products[index].id
-                const res = await ProductsService.deleteProduct(productId)
-                if(res){ this.products.splice(index , 1) }
+            async deleteProduct(item){
+                let index = this.products.findIndex(pro => pro === item); //retuning the index of the array where the item is equal to the item
+                let productId = this.products[index].id //getting that element of array
+                const res = await ProductsService.deleteProduct(productId) //making de DELETE request and deleting the record from the db
+                if(res){ this.products.splice(index , 1) } // Removing the item from the array
             },
             addCreatedProductToArray(createdProduct){
                 this.products.unshift(createdProduct)
