@@ -32,19 +32,7 @@
                     <td>{{row.item.title}}</td>
                     <td>{{row.item.summary}}</td>
                     <td>
-                        <v-icon
-                            small
-                            class="mr-2"
-                            @click="editItem(item)"
-                        >
-                            mdi-pencil
-                        </v-icon>
-                        <v-icon
-                            small
-                            @click="deleteProduct(row.item)"
-                        >
-                            mdi-delete
-                        </v-icon>
+                        <delete-product :itemToDelete="row.item" @removeDeleted="removeDeleted" />
                     </td>
                 </tr>
             </template>
@@ -57,13 +45,13 @@ import ProductForm from "../../Forms/ProductForm"
 import CategoryForm from "../../Forms/CategoryForm"
 import EditProductModal from "./EditProductModal"
 import ProductsService from '../../../services/ProductsService'
-import ConfirmationDialog from '../../Dialogs/ConfirmationDialog'
+import DeleteProduct from '../../Dialogs/DeleteProduct'
     export default {
         components: {
             'product-form': ProductForm,
             'category-form': CategoryForm,
             'edit-product-modal': EditProductModal,
-            'confirmation-dialog': ConfirmationDialog
+            'delete-product': DeleteProduct
         },
         data() {
             return {
@@ -87,7 +75,7 @@ import ConfirmationDialog from '../../Dialogs/ConfirmationDialog'
             this.products = res.data;
         },
         methods:{
-            async deleteProduct(item){
+            async removeDeleted(item){
                 let index = this.products.findIndex(pro => pro === item); //retuning the index of the array where the item is equal to the item
                 let productId = this.products[index].id //getting that element of array
                 const res = await ProductsService.deleteProduct(productId) //making de DELETE request and deleting the record from the db

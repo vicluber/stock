@@ -1,5 +1,4 @@
 <template>
-    <v-row>
         <v-form
             ref="form"
             v-model="valid"
@@ -18,8 +17,8 @@
                 :items="categories"
                 item-text="title"
                 item-value="id"
-                :rules="[v => !!v || 'Item is required']"
-                label="Item"
+                :rules="[v => !!v || 'Category is required']"
+                label="Category"
                 required
             ></v-select>
         
@@ -46,15 +45,7 @@
             >
                 Reset Form
             </v-btn>
-        
-            <v-btn
-                color="warning"
-                @click="resetValidation"
-            >
-                Reset Validation
-            </v-btn>
         </v-form>
-    </v-row>
 </template>
 <script>
 import CategoriesService from '../../services/CategoriesService'
@@ -79,7 +70,6 @@ export default {
             categories: [],
         }
     },
-    name: 'ProductForm',
     async created(){
         const res = await CategoriesService.getAllCategories()
         this.categories = res.data;
