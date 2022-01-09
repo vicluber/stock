@@ -3,12 +3,7 @@
         <v-row class="py-12">
             <v-col
                 cols="12"
-                md="6"
-            >
-            </v-col>
-            <v-col
-                cols="12"
-                md="6"
+                md="12"
             >
                 <category-form />
             </v-col>
@@ -23,7 +18,7 @@
                 <tr>
                     <td>{{row.item.id}}</td>
                     <td>{{row.item.title}}</td>
-                    <td>{{row.item.summary}}</td>
+                    <td>{{row.item.slug}}</td>
                     <td>
                         <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
                     </td>
@@ -53,6 +48,7 @@ import CategoriesService from '../../../services/CategoriesService'
                         value: 'id',
                     },
                     { text: 'Title', value: 'title' },
+                    { text: 'Slug', value: 'slug' },
                     { text: 'actions', value: 'actions' }
                 ],
                 categories: []
