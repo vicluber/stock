@@ -5,7 +5,7 @@
                 cols="12"
                 md="12"
             >
-                <category-form />
+                <category-form @createdCategory="addCreatedCategoryToArray" />
             </v-col>
         </v-row>
         <v-data-table
@@ -65,8 +65,8 @@ import CategoriesService from '../../../services/CategoriesService'
                 const res = await CategoriesService.deleteCategory(id) //making de DELETE request and deleting the record from the db
                 if(res){ this.categories.splice(index , 1) } // Removing the item from the array
             },
-            addCreatedProductToArray(createdProduct){
-                this.products.unshift(createdProduct)
+            addCreatedCategoryToArray(createdCategory){
+                this.categories.unshift(createdCategory)
             }
         }
     } 

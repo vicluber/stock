@@ -39,6 +39,7 @@
 <script>
 import CategoriesService from '../../services/CategoriesService'
 export default {
+    name: 'CategoryForm',
     data() {
         return {
             valid: true,
@@ -53,14 +54,8 @@ export default {
                 type: 1,
                 content: '',
                 category: 0
-            },
-            categories: [],
+            }
         }
-    },
-    name: 'CategoryForm',
-    async created(){
-        const res = await CategoriesService.getAllCategories()
-        this.categories = res.data;
     },
     methods:{
         async addCategory(){

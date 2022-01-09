@@ -36,7 +36,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $newCategory = new Category();
+            $newCategory->title = $request->input('title');
+            $newCategory->slug = $request->input('slug');
+            $newCategory->domain_id = $request->input('domainId');
+            $newCategory->save();
+            return response()->json([
+                'success'=>true,
+                'message'=>'string',
+                'data'=>$newCategory
+            ]);
+        } catch (RepositoryException $e) {
+            return response()->error(__('error.resolved', ['resource' => 'des Kommentars', 'resourceE' => 'comment']), 400, $e);
+        }
     }
 
     /**

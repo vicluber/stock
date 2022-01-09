@@ -7,16 +7,12 @@
             >
                 <product-form
                     @createdProduct="addCreatedProductToArray"
-                    @toggleCreateCategory="showCategoryForm = !showCategoryForm"
                 />
             </v-col>
             <v-col
                 cols="12"
                 md="6"
             >
-                <category-form
-                    v-if="showCategoryForm"
-                />
             </v-col>
         </v-row>
         <v-data-table
@@ -63,8 +59,7 @@ import DeleteDialogConfirmation from '../../Dialogs/DeleteDialogConfirmation.vue
                     { text: 'Summary', value: 'summary' },
                     { text: 'actions', value: 'actions' }
                 ],
-                products: [],
-                showCategoryForm: false
+                products: []
             }
         },
         async created(){
