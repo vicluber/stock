@@ -1,6 +1,5 @@
 <template>
     <div class="col-10">
-        <edit-product-modal />
         <v-row class="py-12">
             <v-col
                 cols="12"
@@ -43,14 +42,12 @@
 <script>
 import ProductForm from "../../Forms/ProductForm"
 import CategoryForm from "../../Forms/CategoryForm"
-import EditProductModal from "./EditProductModal"
 import ProductsService from '../../../services/ProductsService'
 import DeleteDialogConfirmation from '../../Dialogs/DeleteDialogConfirmation.vue'
     export default {
         components: {
             'product-form': ProductForm,
             'category-form': CategoryForm,
-            'edit-product-modal': EditProductModal,
             'delete-dialog-confirmation': DeleteDialogConfirmation
         },
         data() {

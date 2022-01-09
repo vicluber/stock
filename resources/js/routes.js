@@ -3,6 +3,7 @@ import Register from './components/Auth/Register.vue';
 import Products from './components/Tables/Products/Products.vue';
 import Dashboard from './components/Dashboard.vue';
 import Categories from './components/Tables/Categories/Categories.vue';
+import Items from './components/Tables/Items/Items.vue';
 import App from './App.vue';
 
 export const routes = [
@@ -25,6 +26,11 @@ export const routes = [
         name: 'Products',
         path: '/products',
         component: Products
+    },
+    {
+        name: 'Items',
+        path: '/items',
+        component: Items
     },
     {
         name: 'Dashboard',

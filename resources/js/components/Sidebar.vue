@@ -16,7 +16,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/products">
+                    <router-link class="nav-link" to="/items">
                     Items
                     </router-link>
                 </li>
