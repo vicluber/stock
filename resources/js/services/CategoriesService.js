@@ -5,4 +5,7 @@ export default {
     getAllCategories () {
         return axios.get('api/categories')
     },
+    deleteCategory (categoryId) {
+        return axios.delete('api/categories/'+categoryId)
+    },
 }
