@@ -21,7 +21,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/products">
+                    <router-link class="nav-link" to="/categories">
                     Caregories
                     </router-link>
                 </li>
