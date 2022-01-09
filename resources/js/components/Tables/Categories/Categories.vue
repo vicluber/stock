@@ -25,7 +25,7 @@
                     <td>{{row.item.title}}</td>
                     <td>{{row.item.summary}}</td>
                     <td>
-                        <delete-category :itemToDelete="row.item" @removeDeleted="removeDeleted" />
+                        <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
                     </td>
                 </tr>
             </template>
@@ -35,13 +35,13 @@
 
 <script>
 import CategoryForm from "../../Forms/CategoryForm"
-import DeleteCategory from '../../Dialogs/DeleteCategory'
+import DeleteDialogConfirmation from '../../Dialogs/DeleteDialogConfirmation'
 import CategoriesService from '../../../services/CategoriesService'
     export default {
         name: 'Categories',
         components: {
             'category-form': CategoryForm,
-            'delete-category': DeleteCategory
+            'delete-dialog-confirmation': DeleteDialogConfirmation
         },
         data() {
             return {

@@ -58,7 +58,7 @@
     methods:{
       async deleteItem(item){
         this.dialog = !this.dialog
-        this.$emit('removeDeleted', item)
+        this.$emit('deleteAction', item)
       }
     }
   }

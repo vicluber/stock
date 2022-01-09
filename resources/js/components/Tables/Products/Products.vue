@@ -32,7 +32,7 @@
                     <td>{{row.item.title}}</td>
                     <td>{{row.item.summary}}</td>
                     <td>
-                        <delete-product :itemToDelete="row.item" @removeDeleted="removeDeleted" />
+                        <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
                     </td>
                 </tr>
             </template>
@@ -45,13 +45,13 @@ import ProductForm from "../../Forms/ProductForm"
 import CategoryForm from "../../Forms/CategoryForm"
 import EditProductModal from "./EditProductModal"
 import ProductsService from '../../../services/ProductsService'
-import DeleteProduct from '../../Dialogs/DeleteProduct'
+import DeleteDialogConfirmation from '../../Dialogs/DeleteDialogConfirmation.vue'
     export default {
         components: {
             'product-form': ProductForm,
             'category-form': CategoryForm,
             'edit-product-modal': EditProductModal,
-            'delete-product': DeleteProduct
+            'delete-dialog-confirmation': DeleteDialogConfirmation
         },
         data() {
             return {
