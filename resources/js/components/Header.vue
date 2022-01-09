@@ -34,6 +34,7 @@ export default {
   methods: {
     async logout() {
       localStorage.clear();
+      this.$emit('loggedOut', false)
       const res = await UsersService.logout();
       if (res) {
         this.$router.push({ name: "Login" });

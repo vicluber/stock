@@ -1,9 +1,9 @@
 <template>
     <v-app>
-        <header-component v-if="auth" />
+        <header-component v-if="authenticated" @loggedOut="loggedOut" />
         <div class="container-fluid">
             <div class="row">
-                <sidebar-component v-if="auth" />
+                <sidebar-component v-if="authenticated" />
                 <router-view></router-view>
             </div>
         </div>
@@ -18,13 +18,17 @@ import Header from "./components/Header"
             'sidebar-component': Sidebar,
             'header-component': Header,
         },
-        created() {
-            console.log("Is authenticated: "+this.auth)
+        data() {
+            return {
+                authenticated: false
+            }
         },
-        computed: {
-            auth ()
-            {
-                return (!localStorage.getItem("auth")) ? false : true
+        created() {
+            this.authenticated = (!localStorage.getItem("auth")) ? false : true
+        },
+        methods: {
+            loggedOut(value){
+                this.authenticated = value
             }
         }
     }
