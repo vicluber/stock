@@ -5,7 +5,7 @@ export default {
     getAllItems () {
         return axios.get('api/items')
     },
-    deleteItems (itemId) {
+    deleteItem (itemId) {
         return axios.delete('api/items/'+itemId)
     },
 }

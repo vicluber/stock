@@ -14,7 +14,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        //
+        $items = Item::all()->toArray();
+        return array_reverse($items);
     }
 
     /**
@@ -80,6 +81,9 @@ class ItemController extends Controller
      */
     public function destroy(Item $item)
     {
-        //
+        if($item->delete()) {
+            return true;
+        }
+        return false;
     }
 }
