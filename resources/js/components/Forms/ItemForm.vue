@@ -43,6 +43,11 @@ export default {
             ],
             formData: {
                 sku: '',
+                productId: 1,
+                price: 0,
+                quantity: 9999,
+                mrp: 10,
+                discount: 0,
                 domainId: 1,
                 userId: 1
             }

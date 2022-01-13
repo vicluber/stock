@@ -21,12 +21,12 @@ class CreateItemsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('sku');
             $table->float('mrp');
-            $table->float('discount');
+            $table->float('discount')->default(0);
             $table->float('price');
-            $table->smallInteger('quantity');
-            $table->smallInteger('sold');
-            $table->smallInteger('available');
-            $table->smallInteger('defective');
+            $table->smallInteger('quantity')->default(9999);
+            $table->smallInteger('sold')->default(0);
+            $table->smallInteger('available')->default(1);
+            $table->smallInteger('defective')->default(0);
             $table->timestamps();
         });
     }

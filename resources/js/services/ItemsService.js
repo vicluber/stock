@@ -8,4 +8,7 @@ export default {
     deleteItem (itemId) {
         return axios.delete('api/items/'+itemId)
     },
+    postItem (formData) {
+      return axios.post('api/items', { sku: formData.sku, productId: formData.productId, userId: formData.userId, mrp: formData.mrp, discount: formData.discount, price: formData.price, quantity: formData.quantity })
+    }
 }

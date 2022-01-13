@@ -36,7 +36,24 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $newItem = new Item();
+            $newItem->sku = $request->input('sku');
+            $newItem->product_id = $request->input('productId');
+            $newItem->user_id = $request->input('userId');
+            $newItem->mrp = $request->input('mrp');
+            $newItem->discount = $request->input('discount');
+            $newItem->price = $request->input('price');
+            $newItem->quantity = $request->input('quantity');
+            $newItem->save();
+            return response()->json([
+                'success'=>true, 
+                'message'=>'string', 
+                'data'=>$newItem
+            ]);
+        } catch (RepositoryException $e) {
+            return response()->error(__('error.resolved', ['resource' => 'des Kommentars', 'resourceE' => 'comment']), 400, $e);
+        }
     }
 
     /**
