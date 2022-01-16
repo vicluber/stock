@@ -60,6 +60,7 @@
                 const res = await UsersService.authenticate(this.formData)
                 this.error = res.data.message
                 if(res.data.authenticated){
+                    localStorage.setItem("user_id", res.data.user.id)
                     localStorage.setItem("token", res.data.token)
                     localStorage.setItem("auth", res.data.authenticated)
                     axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.token}`

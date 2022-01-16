@@ -49,7 +49,7 @@ export default {
                 mrp: 10,
                 discount: 0,
                 domainId: 1,
-                userId: 1
+                userId: localStorage.getItem("user_id")
             }
         }
     },

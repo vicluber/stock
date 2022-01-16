@@ -65,6 +65,7 @@ export default {
                 summary: '',
                 type: 1,
                 content: '',
+                userId: localStorage.getItem("user_id"),
                 category: 0
             },
             categories: [],

@@ -9,6 +9,6 @@ export default {
     return axios.delete('api/products/'+productId)
   },
   postProduct (formData) {
-    return axios.post('api/products', { title: formData.title, domainId: formData.domainId, summary: formData.summary, type: formData.type, content: formData.content, category: formData.category })
+    return axios.post('api/products', { title: formData.title, domainId: formData.domainId, summary: formData.summary, type: formData.type, content: formData.content, category: formData.category, userId: formData.userId })
   }
 }
