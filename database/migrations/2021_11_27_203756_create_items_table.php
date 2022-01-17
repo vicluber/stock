@@ -17,6 +17,10 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id')->unsigned()->index();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->unsignedBigInteger('brand_id')->unsigned()->index();
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
+            $table->unsignedBigInteger('supplier_id')->unsigned()->index();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('sku');
