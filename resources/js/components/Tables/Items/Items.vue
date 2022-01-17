@@ -25,6 +25,9 @@
                 <tr>
                     <td>{{row.item.id}}</td>
                     <td>{{row.item.sku}}</td>
+                    <td>{{row.item.product.title}}</td>
+                    <td>{{row.item.brand.title}}</td>
+                    <td>{{row.item.supplier.title}}</td>
                     <td>
                         <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
                     </td>
@@ -52,7 +55,11 @@ import ItemForm from '../../Forms/ItemForm.vue'
                         sortable: true,
                         value: 'id',
                     },
-                    { text: 'Sku', value: 'sku' }
+                    { text: 'Sku', value: 'sku' },
+                    { text: 'Product', value: 'product.title' },
+                    { text: 'Brand', value: 'brand.title' },
+                    { text: 'supplier', value: 'supplier.title' },
+                    { text: 'Actions', value: '' },
                 ],
                 items: []
             }

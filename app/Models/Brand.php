@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
     use HasFactory;
+    /**
+     * Get the items associated with the brand.
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
 }

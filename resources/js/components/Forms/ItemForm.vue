@@ -16,7 +16,7 @@
             :items="products"
             item-text="title"
             item-value="id"
-            :rules="[v => !!v || 'Product is required']"
+            :rules="productRules"
             label="Product"
             required
         ></v-autocomplete>
@@ -53,6 +53,9 @@ export default {
             skuRules: [
                 v => !!v || 'SKU is required',
                 v => (v && v.length <= 255) || 'SKU must be less than 255 characters',
+            ],
+            productRules: [
+                [v => !!v || 'Product is required']
             ],
             formData: {
                 sku: '',

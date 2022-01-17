@@ -14,8 +14,8 @@ class ItemController extends Controller
      */
     public function index()
     {
-        $items = Item::all()->toArray();
-        return array_reverse($items);
+        $items = Item::orderBy('id', 'desc')->with('brand', 'supplier', 'product')->get()->toArray();
+        return $items;
     }
 
     /**
