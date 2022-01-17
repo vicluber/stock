@@ -11,6 +11,15 @@
             label="SKU"
             required
         ></v-text-field>
+        <v-autocomplete
+            v-model="formData.product"
+            :items="products"
+            item-text="title"
+            item-value="id"
+            :rules="[v => !!v || 'Product is required']"
+            label="Product"
+            required
+        ></v-autocomplete>
 
         <v-btn
             :disabled="!valid"
@@ -32,8 +41,12 @@
 </template>
 <script>
 import ItemsService from '../../services/ItemsService'
+import ProductsService from '../../services/ProductsService'
 export default {
     name: 'ItemForm',
+    props: {
+
+    },
     data() {
         return {
             valid: true,
@@ -50,8 +63,13 @@ export default {
                 discount: 0,
                 domainId: 1,
                 userId: localStorage.getItem("user_id")
-            }
+            },
+            products: []
         }
+    },
+    async created() {
+        const res = await ProductsService.getAllProducts()
+        this.products = res.data;
     },
     methods:{
         async addItem(){
