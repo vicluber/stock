@@ -12,7 +12,7 @@
             required
         ></v-text-field>
         <v-autocomplete
-            v-model="formData.product"
+            v-model="formData.productId"
             :items="products"
             item-text="title"
             item-value="id"
