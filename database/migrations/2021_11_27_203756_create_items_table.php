@@ -21,8 +21,8 @@ class CreateItemsTable extends Migration
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->unsignedBigInteger('supplier_id')->unsigned()->index();
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->unsigned()->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('domain_id')->unsigned()->index();
+            $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
             $table->string('sku');
             $table->float('mrp');
             $table->float('discount')->default(0);

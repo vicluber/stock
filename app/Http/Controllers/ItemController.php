@@ -17,7 +17,6 @@ class ItemController extends Controller
         $items = Item::orderBy('id', 'desc')->with('brand', 'supplier', 'product')->get()->toArray();
         return $items;
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -40,12 +39,17 @@ class ItemController extends Controller
             $newItem = new Item();
             $newItem->sku = $request->input('sku');
             $newItem->product_id = $request->input('productId');
-            $newItem->user_id = $request->input('userId');
+            $newItem->brand_id = $request->input('brandId');
+            $newItem->supplier_id = $request->input('supplierId');
+            $newItem->domain_id = $request->input('domainId');
             $newItem->mrp = $request->input('mrp');
             $newItem->discount = $request->input('discount');
             $newItem->price = $request->input('price');
             $newItem->quantity = $request->input('quantity');
             $newItem->save();
+            $newItem['brand'] = $newItem->brand();
+            $newItem['supplier'] = $newItem->supplier();
+            $newItem['product'] = $newItem->product();
             return response()->json([
                 'success'=>true, 
                 'message'=>'string', 

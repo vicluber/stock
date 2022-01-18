@@ -17,7 +17,7 @@ class ItemFactory extends Factory
             'product_id' => \App\Models\Domain::inRandomOrder()->first()->id,
             'brand_id' => \App\Models\Brand::inRandomOrder()->first()->id,
             'supplier_id' => \App\Models\Supplier::inRandomOrder()->first()->id,
-            'user_id' => \App\Models\User::inRandomOrder()->first()->id,
+            'domain_id' => \App\Models\Domain::inRandomOrder()->first()->id,
             'sku' => $this->faker->company(),
             'mrp' => $this->faker->randomFloat(2, 0, 50),
             'discount' => $this->faker->randomFloat(2, 0, 50),

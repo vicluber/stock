@@ -16,7 +16,7 @@
             :items="products"
             item-text="title"
             item-value="id"
-            :rules="productRules"
+            :rules="[v => !!v || 'Product is required']"
             label="Product"
             required
         ></v-autocomplete>
@@ -54,18 +54,17 @@ export default {
                 v => !!v || 'SKU is required',
                 v => (v && v.length <= 255) || 'SKU must be less than 255 characters',
             ],
-            productRules: [
-                [v => !!v || 'Product is required']
-            ],
             formData: {
                 sku: '',
                 productId: 1,
+                brandId: 1,
+                supplierId: 1,
                 price: 0,
                 quantity: 9999,
                 mrp: 10,
                 discount: 0,
                 domainId: 1,
-                userId: localStorage.getItem("user_id")
+                //userId: localStorage.getItem("user_id")
             },
             products: []
         }
