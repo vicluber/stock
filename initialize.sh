@@ -11,7 +11,7 @@ case "$applicationContext" in
 		;;
 esac
 
-echo "initialize? (y/n)"
+echo "Initialize setup? (y/n)"
 read initializeWebsite
 
 
@@ -19,22 +19,18 @@ dockerContainer=stock-workspace
 dockerDatabaseContainer=stock-db
 
 setFilePermissions() {
-
-	# chown folder for cache
-
-	echo "set correct access rights"
-	#docker exec $dockerContainer chown www-data /var/www
+	echo "Set correct access rights (Currently doing nothing)"
 }
 
 initializeWebsite() {
-    echo "cop env and compose? (y/n)"
+    echo "Copy .env.example into .env and docker-compose.applicationContext.yml in docker-compose.yml? (y/n)"
     read copyenvcomp 
     if [ "$copyenvcomp" == "y" ]
         then
             copyenvcomposeFiles
     fi
 
-    echo "start docker? (y/n)"
+    echo "Start docker? (y/n)"
     read startdocker
     if [ "$startdocker" == "y" ]
         then
@@ -43,9 +39,9 @@ initializeWebsite() {
 	
 	case "$applicationContext" in
 		"local")
-			echo "setting .htaccess for local environment..."
+			echo "Setting .htaccess for local environment..."
 			#docker cp htaccess/_htaccess.development.localhost $dockerContainer:$currentFolder/html/.htaccess && echo ".htaccess set successfully..."
-			echo "site config set successfully..."
+			echo "Site config set successfully..."
 			;;
 	esac		
 	
@@ -53,10 +49,14 @@ initializeWebsite() {
 	read composerinstall
 	if [ "$composerinstall" == "y" ]
 		then
+			echo "Installing php dependencies (composer install)"
 			docker exec $dockerContainer composer install
-			docker exec $dockerContainer npm install
+			echo "Installing all js dependencies with (npm update)"
 			docker exec $dockerContainer npm update
+			echo "Building js and css bundles (npm run development)"
 			docker exec $dockerContainer npm run development
+			echo "Building db structure (php artisan migrate)"
+			docker exec $dockerContainer php artisan migrate
 	fi
 
 	#echo "Prepare filestructure"
@@ -70,7 +70,11 @@ initializeWebsite() {
 			read insertdummydata
 			if [ "$insertdummydata" == "y" ]
 				then
-					echo "HERE EXEUTE PHP ARTISAN MIGRATE AND SO ON"
+					echo "Inserting dummy data on database for displaying as example (php artisan db:seed)"
+					docker exec $dockerContainer php artisan db:seed --class=BrandSeeder
+					docker exec $dockerContainer php artisan db:seed --class=PersonSeeder
+					docker exec $dockerContainer php artisan db:seed --class=SupplierSeeder
+					docker exec $dockerContainer php artisan db:seed
 			fi
 	fi
 }
@@ -78,12 +82,14 @@ initializeWebsite() {
 copyenvcomposeFiles() {
     if [ "$applicationContext" == "local" ]
 		then
+			echo "Running 'cp docker-compose.yml.local docker-compose.yml' and 'cp .env.example .env'..."
 			cp docker-compose.yml.local docker-compose.yml
 			cp .env.example .env
 	fi
 }
 
 startDocker() {
+	echo "Running docker-compose up -d..."
     docker-compose up -d
 }
 
