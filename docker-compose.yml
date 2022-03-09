@@ -64,7 +64,7 @@ services:
     ports:
       - '8080:80'
     environment:
-      PMA_HOST: db
+      PMA_HOST: ${DB_HOST}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - app-network
