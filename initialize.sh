@@ -55,6 +55,8 @@ initializeWebsite() {
 		then
 			docker exec $dockerContainer composer install
 			docker exec $dockerContainer npm install
+			docker exec $dockerContainer npm update
+			docker exec $dockerContainer npm run development
 	fi
 
 	#echo "Prepare filestructure"
@@ -77,7 +79,7 @@ copyenvcomposeFiles() {
     if [ "$applicationContext" == "local" ]
 		then
 			cp docker-compose.yml.local docker-compose.yml
-			cp _env.example .env
+			cp .env.example .env
 	fi
 }
 
