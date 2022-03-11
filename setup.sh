@@ -51,7 +51,7 @@ initializeWebsite() {
 		then
 			echo "Installing php dependencies (composer install)"
 			docker exec $dockerContainer composer install
-			echo "Installing all js dependencies with (npm update)"
+			echo "Installing all js dependencies throug npm (npm update)"
 			docker exec $dockerContainer npm update
 			echo "Building js and css bundles (npm run development)"
 			docker exec $dockerContainer npm run development
@@ -75,6 +75,7 @@ initializeWebsite() {
 					docker exec $dockerContainer php artisan db:seed --class=PersonSeeder
 					docker exec $dockerContainer php artisan db:seed --class=SupplierSeeder
 					docker exec $dockerContainer php artisan db:seed
+					echo "Everything seems alright, don't know what does it mean the next lines."
 			fi
 	fi
 }
