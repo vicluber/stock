@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreBrandRequest;
-use App\Http\Requests\UpdateBrandRequest;
+use Illuminate\Http\Request;
 use App\Models\Brand;
 
 class BrandController extends Controller
@@ -15,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all()->toArray();
+        return array_reverse($brands);
     }
 
     /**
