@@ -44,7 +44,8 @@
                     name: '',
                     email: '',
                     password: '',
-                    password_confirmation: ''
+                    password_confirmation: '',
+                    person_id: 13
                 },
                 errors: {
                     name: [],
