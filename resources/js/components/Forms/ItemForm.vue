@@ -11,6 +11,7 @@
             label="SKU"
             required
         ></v-text-field>
+
         <v-autocomplete
             v-model="formData.productId"
             :items="products"
@@ -18,6 +19,26 @@
             item-value="id"
             :rules="[v => !!v || 'Product is required']"
             label="Product"
+            required
+        ></v-autocomplete>
+
+        <v-autocomplete
+            v-model="formData.brandId"
+            :items="brands"
+            item-text="title"
+            item-value="id"
+            :rules="[v => !!v || 'Brand is required']"
+            label="Brand"
+            required
+        ></v-autocomplete>
+
+        <v-autocomplete
+            v-model="formData.supplierId"
+            :items="suppliers"
+            item-text="title"
+            item-value="id"
+            :rules="[v => !!v || 'Supplier is required']"
+            label="Supplier"
             required
         ></v-autocomplete>
 
@@ -42,6 +63,8 @@
 <script>
 import ItemsService from '../../services/ItemsService'
 import ProductsService from '../../services/ProductsService'
+import BrandsService from '../../services/BrandsService'
+import SuppliersService from '../../services/SuppliersService'
 export default {
     name: 'ItemForm',
     props: {
@@ -56,9 +79,9 @@ export default {
             ],
             formData: {
                 sku: '',
-                productId: 1,
-                brandId: 1,
-                supplierId: 1,
+                productId: null,
+                brandId: null,
+                supplierId: null,
                 price: 0,
                 quantity: 9999,
                 mrp: 10,
@@ -66,12 +89,18 @@ export default {
                 domainId: 1,
                 //userId: localStorage.getItem("user_id")
             },
-            products: []
+            products: [],
+            brands: [],
+            suppliers: []
         }
     },
     async created() {
-        const res = await ProductsService.getAllProducts()
-        this.products = res.data;
+        const products = await ProductsService.getAllProducts()
+        this.products = products.data;
+        const brands = await BrandsService.getAllBrands()
+        this.brands = brands.data;
+        const suppliers = await SuppliersService.getAllSuppliers()
+        this.suppliers = suppliers.data;
     },
     methods:{
         async addItem(){
