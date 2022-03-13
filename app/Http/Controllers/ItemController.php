@@ -47,9 +47,9 @@ class ItemController extends Controller
             $newItem->price = $request->input('price');
             $newItem->quantity = $request->input('quantity');
             $newItem->save();
-            $newItem['brand'] = $newItem->brand();
-            $newItem['supplier'] = $newItem->supplier();
-            $newItem['product'] = $newItem->product();
+            $newItem['brand'] = $newItem->brand()->get()->first();
+            $newItem['supplier'] = $newItem->supplier()->get()->first();
+            $newItem['product'] = $newItem->product()->get()->first();
             return response()->json([
                 'success'=>true, 
                 'message'=>'string', 
