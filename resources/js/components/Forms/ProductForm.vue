@@ -9,6 +9,7 @@
                 :counter="10"
                 :rules="titleRules"
                 label="Title"
+                solo
                 required
             ></v-text-field>
         
@@ -19,6 +20,7 @@
                 item-value="id"
                 :rules="[v => !!v || 'Category is required']"
                 label="Category"
+                solo
                 required
             ></v-select>
         
@@ -26,6 +28,7 @@
                 v-model="formData.summary"
                 label="Summary"
                 value=""
+                solo
                 hint="Short description"
             ></v-textarea>
 

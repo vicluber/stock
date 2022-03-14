@@ -9,12 +9,14 @@
             :counter="10"
             :rules="titleRules"
             label="Title"
+            solo
             required
         ></v-text-field>
 
         <v-text-field
             v-model="formData.slug"
             :counter="10"
+            solo
             label="Slug"
         ></v-text-field>
 

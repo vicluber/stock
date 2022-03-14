@@ -1,30 +1,35 @@
 <template>
-    <div class="col-10">
-        <v-row class="py-12">
+    <div class="col-12 color-bg-d">
+        <v-row>
             <v-col
-                cols="12"
-                md="12"
+                cols="8"
+                md="8"
             >
                 <category-form @createdCategory="addCreatedCategoryToArray" />
             </v-col>
+            <v-col
+                cols="4"
+                md="4"
+            >
+                <v-data-table
+                    :headers="headers"
+                    :items="categories"
+                    item-key="id"
+                    class="py-12"
+                >
+                    <template v-slot:item="row">
+                        <tr>
+                            <td>{{row.item.id}}</td>
+                            <td>{{row.item.title}}</td>
+                            <td>{{row.item.slug}}</td>
+                            <td>
+                                <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
+                            </td>
+                        </tr>
+                    </template>
+                </v-data-table>
+            </v-col>
         </v-row>
-        <v-data-table
-            :headers="headers"
-            :items="categories"
-            item-key="id"
-            class="py-12"
-        >
-            <template v-slot:item="row">
-                <tr>
-                    <td>{{row.item.id}}</td>
-                    <td>{{row.item.title}}</td>
-                    <td>{{row.item.slug}}</td>
-                    <td>
-                        <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
-                    </td>
-                </tr>
-            </template>
-        </v-data-table>
     </div>
 </template>
 

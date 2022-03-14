@@ -1,39 +1,37 @@
 <template>
-    <div class="col-10">
-        <v-row class="py-12">
+    <div class="col-12 color-bg-c">
+        <v-row>
             <v-col
-                cols="12"
-                md="6"
+                cols="8"
+                md="8"
             >
                 <item-form
                     @createdItem="addCreatedItemToArray"
                 />
             </v-col>
             <v-col
-                cols="12"
-                md="6"
+                cols="4"
+                md="4"
             >
+                <v-data-table
+                    :headers="headers"
+                    :items="items"
+                    item-key="id"
+                >
+                    <template v-slot:item="row">
+                        <tr>
+                            <td>{{row.item.id}}</td>
+                            <td>{{row.item.sku}}</td>
+                            <td>{{row.item.product.title}}</td>
+                            <td>{{row.item.brand.title}}</td>
+                            <td>
+                                <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
+                            </td>
+                        </tr>
+                    </template>
+                </v-data-table>
             </v-col>
         </v-row>
-        <v-data-table
-            :headers="headers"
-            :items="items"
-            item-key="id"
-            class="py-12"
-        >
-            <template v-slot:item="row">
-                <tr>
-                    <td>{{row.item.id}}</td>
-                    <td>{{row.item.sku}}</td>
-                    <td>{{row.item.product.title}}</td>
-                    <td>{{row.item.brand.title}}</td>
-                    <td>{{row.item.supplier.title}}</td>
-                    <td>
-                        <delete-dialog-confirmation :itemToDelete="row.item" @deleteAction="removeDeleted" />
-                    </td>
-                </tr>
-            </template>
-        </v-data-table>
     </div>
 </template>
 
@@ -58,7 +56,6 @@ import ItemForm from '../../Forms/ItemForm.vue'
                     { text: 'Sku', value: 'sku' },
                     { text: 'Product', value: 'product.title' },
                     { text: 'Brand', value: 'brand.title' },
-                    { text: 'supplier', value: 'supplier.title' },
                     { text: 'Actions', value: '' },
                 ],
                 items: []

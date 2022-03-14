@@ -1,6 +1,6 @@
 <template>
-  <div>
-    Dashboard
+  <div class="col-12 color-bg-a">
+    Dashboardasdfsafasfad
   </div>
 </template>
 

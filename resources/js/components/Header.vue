@@ -1,28 +1,86 @@
 <template>
-  <header
-    class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
-  >
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Stock</a>
-    <button
-      class="navbar-toggler position-absolute d-md-none collapsed"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#sidebarMenu"
-      aria-controls="sidebarMenu"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <input
-      class="form-control form-control-dark w-100"
-      type="text"
-      placeholder="Search"
-      aria-label="Search"
-    />
-    <div class="navbar-nav">
-      <div class="nav-item text-nowrap">
-        <a href="#" class="nav-link px-3" @click="logout">Sign out</a>
+  <header class="container-fluid bg-blue">
+    <div class="row row-cols-auto justify-content-center">
+      <div class="col color-bg-a">
+        <router-link class="nav-link" to="/dashboard">
+          <v-icon
+              large
+            >
+            mdi-home
+          </v-icon>
+        </router-link>
+      </div>
+      <div class="col color-bg-b">
+        <router-link class="nav-link" to="/products">
+          <v-icon
+              large
+            >
+            mdi-package-variant-closed
+          </v-icon>
+        </router-link>
+      </div>
+      <div class="col color-bg-c">
+        <router-link class="nav-link" to="/items">
+          <v-icon
+            large
+          >
+              mdi-plus-box
+          </v-icon>
+        </router-link>
+      </div>
+      <div class="col color-bg-d">
+        <router-link class="nav-link" to="/categories">
+          <v-icon
+              large
+            >
+            mdi-account-check
+          </v-icon>
+        </router-link>
+      </div>
+      <div class="col color-bg-e">
+        <a href="#">
+          <v-icon
+              large
+            >
+            mdi-book-account
+          </v-icon>
+        </a>
+      </div>
+      <div class="col color-bg-f">
+        <a href="#">
+          <v-icon
+              large
+            >
+            mdi-book-account
+          </v-icon>
+        </a>
+      </div>
+      <div class="col color-bg-g">
+        <a href="#">
+          <v-icon
+              large
+            >
+            mdi-book-account
+          </v-icon>
+        </a>
+      </div>
+      <div class="col color-bg-h">
+        <a href="#">
+          <v-icon
+              large
+            >
+            mdi-book-account
+          </v-icon>
+        </a>
+      </div>
+      <div class="col color-bg-i">
+        <a href="#" @click="logout">
+          <v-icon
+              large
+            >
+            mdi-book-account
+          </v-icon>
+        </a>
       </div>
     </div>
   </header>

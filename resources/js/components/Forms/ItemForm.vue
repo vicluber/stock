@@ -10,6 +10,7 @@
             :rules="skuRules"
             label="SKU"
             required
+            solo
         ></v-text-field>
 
         <v-autocomplete
@@ -20,6 +21,7 @@
             :rules="[v => !!v || 'Product is required']"
             label="Product"
             required
+            solo
         ></v-autocomplete>
 
         <v-autocomplete
@@ -30,6 +32,7 @@
             :rules="[v => !!v || 'Brand is required']"
             label="Brand"
             required
+            solo
         ></v-autocomplete>
 
         <v-autocomplete
@@ -40,6 +43,7 @@
             :rules="[v => !!v || 'Supplier is required']"
             label="Supplier"
             required
+            solo
         ></v-autocomplete>
 
         <v-btn
