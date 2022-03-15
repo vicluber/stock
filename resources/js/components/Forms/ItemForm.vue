@@ -46,6 +46,13 @@
             solo
         ></v-autocomplete>
 
+        <v-file-input
+            solo
+            multiple
+            v-model="formData.image"
+            truncate-length="15"
+        ></v-file-input>
+
         <v-btn
             :disabled="!valid"
             color="success"

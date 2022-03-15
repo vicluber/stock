@@ -33,18 +33,18 @@
           <v-icon
               large
             >
-            mdi-account-check
+            mdi-shape-outline
           </v-icon>
         </router-link>
       </div>
       <div class="col color-bg-e">
-        <a href="#">
+        <router-link class="nav-link" to="/categories">
           <v-icon
               large
             >
-            mdi-book-account
+            mdi-account-plus
           </v-icon>
-        </a>
+        </router-link>
       </div>
       <div class="col color-bg-f">
         <a href="#">
