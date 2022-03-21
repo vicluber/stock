@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -47,6 +49,20 @@ class ItemController extends Controller
             $newItem->price = $request->input('price');
             $newItem->quantity = $request->input('quantity');
             $newItem->save();
+            // Handle file Upload
+            if($request->file('image')){
+                $storage = Storage::put('public', $request->file('image'));
+                if($storage)
+                {
+                    $fileName = basename($storage);
+                    $image = new Image();
+                    $image->name = $fileName;
+                    $image->public_full_path = asset($storage);
+                    $image->extension = $request->file('image')->getClientOriginalExtension();
+                    $image->save();
+                    $newItem->images()->attach([$image->id]);
+                }
+            }
             $newItem['brand'] = $newItem->brand()->get()->first();
             $newItem['supplier'] = $newItem->supplier()->get()->first();
             $newItem['product'] = $newItem->product()->get()->first();

@@ -29,4 +29,11 @@ class Item extends Model
     {
         return $this->belongsTo(Product::class);
     }
+    /**
+     * Get the images associated with the item.
+     */
+    public function images()
+    {
+        return $this->belongsToMany(Image::class);
+    }
 }
